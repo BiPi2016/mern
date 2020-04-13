@@ -2,8 +2,7 @@ import React from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-class CreateExcercise
- extends React.Component {
+class CreateExcercise extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -70,8 +69,9 @@ class CreateExcercise
                         }
                     </select>
                     <div className="form-group">
-                        <label for="description">Description</label>
+                        <label htmlFor="description">Description</label>
                         <input type="text"
+                         required
                          className="form-control" 
                          id="description" 
                          placeholder="Description of excercise" 
@@ -79,7 +79,7 @@ class CreateExcercise
                          onChange={this.onChangeDescription} />
                     </div>
                     <div className="form-group">
-                        <label for="duration">Duration (in minutes)</label>
+                        <label htmlFor="duration">Duration (in minutes)</label>
                         <input
                          type="number" 
                          className="form-control" 
@@ -89,7 +89,7 @@ class CreateExcercise
                          onChange={this.onChangeDuration}   />
                     </div>
                     <div className="form-group">
-                        <label for="date">Date</label>
+                        <label htmlFor="date">Date</label>
                         <div id="date">
                             <DatePicker 
                              selected={this.state.date}
