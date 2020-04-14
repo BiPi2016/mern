@@ -2,6 +2,13 @@ import React from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
+import {baseURL} from '../util/constants';
+
+import axios from 'axios';
+const instance = axios.create({
+    baseURL: baseURL
+});
+
 class CreateExcercise extends React.Component {
     constructor(props) {
         super(props);
@@ -41,12 +48,26 @@ class CreateExcercise extends React.Component {
             date: this.state.date,
         }
         console.log(excercise);
-        window.location = '/';
+        instance.post('/excercise/add', excercise)
+        .then(result => {
+            console.log(result);
+            window.location = '/';
+        })
+        .catch(err => {
+            console.log(err);
+        })
     }
 
     componentDidMount() {
-        this.setState({users: ['Abhi', 'BiPi', 'Guru']});
-        this.setState({username: this.state.users[0]});
+        instance.get('/user')
+        .then(result => {
+            const users = result.data.map( user => user.username);
+            this.setState({users: users});
+            this.setState({username: users[0]});
+        })
+        .catch( err => {
+            console.log(err);
+        });
     }
 
     render() {

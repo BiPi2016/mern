@@ -1,5 +1,12 @@
 import React from 'react';
 
+import {baseURL} from '../util/constants';
+
+import axios from 'axios';
+const instance = axios.create({
+    baseURL: baseURL
+});
+
 class CreateUser extends React.Component {
     constructor(props) {
         super(props);
@@ -21,9 +28,16 @@ class CreateUser extends React.Component {
             username: this.state.username
         }
         console.log(user);
-        this.setState({
-            username: ''
-        });
+        instance.post('/user/add', user)
+        .then( result => {
+            console.log(result);
+            this.setState({
+                username: ''
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        });        
     }
     
     render() {

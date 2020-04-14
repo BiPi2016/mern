@@ -1,14 +1,14 @@
 import React from 'react';
 
-class EditExercise
- extends React.Component {
+class UsersList extends React.Component {
+
     render() {
         return(
             <div>
-                Edit Exercise
+                all users
             </div>
         );
     }
 }
 
-export default EditExercise;
+export default UsersList;

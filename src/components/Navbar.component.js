@@ -15,10 +15,13 @@ export default class Navbar extends React.Component {
                         <Link className="nav-link" to="/">Excercises <span className="sr-only">(current)</span></Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to="/create">Create excercise log</Link>
+                        <Link className="nav-link" to="/createExcercise">Create excercise log</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to="/user">Create user</Link>
+                        <Link className="nav-link" to="/createUser">Create user</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link className="nav-link" to="/users">All users</Link>
                     </li>
                     </ul>
                 </div>
