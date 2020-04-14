@@ -61,9 +61,14 @@ class CreateExcercise extends React.Component {
     componentDidMount() {
         instance.get('/user')
         .then(result => {
-            const users = result.data.map( user => user.username);
-            this.setState({users: users});
-            this.setState({username: users[0]});
+            let users;
+            if(result.data.length > 0) {                
+                users = result.data.map( user => user.username);
+            }
+            this.setState({
+                users: users,
+                username: users[0]
+            });
         })
         .catch( err => {
             console.log(err);
