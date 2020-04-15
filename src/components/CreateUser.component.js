@@ -28,16 +28,46 @@ class CreateUser extends React.Component {
             username: this.state.username
         }
         console.log(user);
-        instance.post('/user/add', user)
-        .then( result => {
-            console.log(result);
-            this.setState({
-                username: ''
-            });
-        })
-        .catch(err => {
-            console.log(err);
-        });        
+
+        if(this.state.editing) {
+            user.id = this.state.id;
+            instance.put(`/user/update/${this.state.id}`, user)
+            .then( result => {
+                this.setState( {
+                    username: ''
+                });
+                window.location = '/users';
+            })
+        } else {
+            instance.post('/user/add', user)
+            .then( result => {
+                console.log(result);
+                this.setState({
+                    username: ''
+                });
+            })
+            .catch(err => {
+                console.log(err);
+            });  
+        }      
+    }
+
+    componentDidMount() {
+        const id = this.props.match.params.id;
+        if(id) {
+            console.log('Editing :');
+            instance.get(`/user/${id}`)
+            .then( result => {
+                console.log(result);
+                this.setState({
+                    username: result.data.username,
+                    editing: true,
+                    id: id
+                });
+            })
+            .catch( err => console.log(err));
+        }
+
     }
     
     render() {

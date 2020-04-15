@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import axios from 'axios';
 
 import {baseURL} from '../util/constants';
@@ -13,9 +14,13 @@ const User = (props) => {
         <tr>
             <td>{props.user.username}</td>
             <td>
+                <Link to={`/createUser/${props.user._id}`} >
+                    Edit
+                </Link>
+                |
                 <a href="#"
                  onClick={() => props.deleteUser(props.user._id)} >
-                    delete   
+                    Delete   
                 </a>
             </td>
         </tr>  

@@ -12,6 +12,15 @@ router.get('/', (req, res, next) => {
     });
 });
 
+router.get('/:id', (req, res, next) => {
+    User.findById(req.params.id, (err, user) => {
+        if(err) {
+            return(err.status(400).json('Error: ' + err));
+        }
+        return res.json(user);
+    });
+});
+
 router.route('/add').post((req, res, next) => {
     const username = req.body.username;
     console.dir('request ' + req.body.username);
@@ -22,6 +31,20 @@ router.route('/add').post((req, res, next) => {
     newUser.save()
     .then( () => res.json('User added'))
     .catch( err => res.status(400).json('Error: ' + err));
+});
+
+router.put('/update/:id', (req, res, next) => {
+    User.findByIdAndUpdate(req.body.id,
+         {username: req.body.username},
+         {
+            runValidators: true,
+             new: true
+         }, (err, user) => {
+             if(err)
+                next(err);
+            return res.json('User updated ' +user);
+         }
+    );
 });
 
 router.delete('/:id', (req, res, next) => {
