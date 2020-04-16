@@ -11,7 +11,7 @@ const Excercise = (props) => {
             <td>{excercise.duration}</td>
             <td>{excercise.date.substring(0, 10)}</td>
             <td>
-                <Link to={`/edit/${excercise._id}`}>
+                <Link to={`/createExcercise/${excercise._id}`}>
                     Edit
                 </Link>
                 |

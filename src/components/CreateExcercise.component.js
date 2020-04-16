@@ -48,17 +48,27 @@ class CreateExcercise extends React.Component {
             date: this.state.date,
         }
         console.log(excercise);
-        instance.post('/excercise/add', excercise)
-        .then(result => {
-            console.log(result);
-            window.location = '/';
-        })
-        .catch(err => {
-            console.log(err);
-        })
+        if(this.state.id) {
+            instance.put(`/excercise/update/${this.state.id}`, excercise)
+            .then( result => {
+                console.log(result);
+                window.location = '/'
+            })
+            .catch( err => console.log(err));
+        } else {           
+            instance.post('/excercise/add', excercise)
+            .then(result => {
+                console.log(result);
+                window.location = '/';
+            })
+            .catch(err => {
+                console.log(err);
+            });
+        }
     }
 
     componentDidMount() {
+        const id = this.props.match.params.id;
         instance.get('/user')
         .then(result => {
             let users;
@@ -69,10 +79,25 @@ class CreateExcercise extends React.Component {
                 users: users,
                 username: users[0]
             });
+        })        
+        .then(() => {
+            if(id) {
+                instance.get(`/excercise/${id}`)
+                .then( result => {
+                    console.log(result);
+                    this.setState({
+                        id: result.data._id,
+                        username: result.data.username,
+                        description: result.data.description,
+                        duration: result.data.duration,
+                        date: new Date(result.data.date)
+                    });
+                    console.log('Username ' + this.state.username);
+                })
+                .catch( err => console.log(err));    
+            }        
         })
-        .catch( err => {
-            console.log(err);
-        });
+        .catch( err => console.log(err));        
     }
 
     render() {

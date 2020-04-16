@@ -39,6 +39,7 @@ router.delete('/:id', (req, res, next) => {
 });
 
 router.put('/update/:id', (req, res, next) => {
+    console.log(req.body);
     Excercise.updateOne({_id:req.params.id}, {
         username: req.body.username,
         description: req.body.description,
