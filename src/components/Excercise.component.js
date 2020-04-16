@@ -12,7 +12,7 @@ const Excercise = (props) => {
             <td>{excercise.date.substring(0, 10)}</td>
             <td>
                 <Link to={`/createExcercise/${excercise._id}`}>
-                    <button type="button" className="btn btn-link">Edit</button
+                    <button type="button" className="btn btn-link">Edit</button>
                 </Link>
                 |
                 <button className="btn btn-link"
