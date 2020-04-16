@@ -15,13 +15,13 @@ const User = (props) => {
             <td>{props.user.username}</td>
             <td>
                 <Link to={`/createUser/${props.user._id}`} >
-                    Edit
+                    <button type="button" className="btn btn-link">Edit</button>
                 </Link>
                 |
-                <a href="#"
+                <button className="btn btn-link"
                  onClick={() => props.deleteUser(props.user._id)} >
                     Delete   
-                </a>
+                </button>
             </td>
         </tr>  
     );                      

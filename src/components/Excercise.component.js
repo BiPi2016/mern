@@ -12,13 +12,13 @@ const Excercise = (props) => {
             <td>{excercise.date.substring(0, 10)}</td>
             <td>
                 <Link to={`/createExcercise/${excercise._id}`}>
-                    Edit
+                    <button type="button" className="btn btn-link">Edit</button
                 </Link>
                 |
-                <a href="#" 
+                <button className="btn btn-link"
                  onClick={ () => deleteExcercise(excercise._id) }>
                      Delete
-                 </a>   
+                 </button>   
             </td>
         </tr>
     );
