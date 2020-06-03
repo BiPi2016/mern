@@ -12,13 +12,23 @@ router.get('/', (req, res, next) => {
     });
 });
 
-router.get('/:id', (req, res, next) => {
+/* router.get('/:id', (req, res, next) => {
     User.findById(req.params.id, (err, user) => {
         if(err) {
             return(err.status(400).json('Error: ' + err));
         }
         return res.json(user);
     });
+}); */
+
+router.get('/:id', (req, res, next) => {
+    User.findById(req.params.id)
+    .then(user => {
+        if(!user)
+            return next();
+        res.json(user)
+    })
+    .catch(err => next(err));
 });
 
 router.route('/add').post((req, res, next) => {

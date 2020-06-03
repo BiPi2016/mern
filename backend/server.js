@@ -31,6 +31,20 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/excercise', excercisesRouter);
 app.use('/user', usersRouter);
 
+app.use((req, res, next) => {
+    const error = new Error('Resource not found');
+    error.status = 404;
+    next(error);
+});
+
+app.use((err, req, res, next) => {
+    console.log('In error handler')
+    res.status(err.status || 500);
+    res.json({
+        error: err.message
+    });
+});
+
 app.listen(port, () => {
     console.log('Server listening at port ' + port);
 });
